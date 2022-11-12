@@ -1,6 +1,6 @@
 # Hands-on Docker-13 : docker logs, top, stats and diff command
 
-Purpose of the this hands-on training is to teach students how to use docker logs, top and stats commands.
+Purpose of the this hands-on training is to teach students how to use docker logs, top, stats and cp commands.
 
 ## Learning Outcomes
 
@@ -19,6 +19,8 @@ At the end of the this hands-on training, students will be able to;
 - Part 4 - Docker diff command
 
 - Part 5 - Docker cp command
+
+- part 6 - env and env-file flag
 
 ## Part 1 - Launch a Docker Machine Instance and Connect with SSH
 
@@ -193,7 +195,7 @@ docker container run --name ng-4 -d nginx
 - Copy `myfolder` to container.
 
 ```bash
-docker cp myfolder cp:/
+docker cp myfolder ng-4:/
 ```
 
 - Check the folder inside the container.
@@ -214,4 +216,34 @@ docker cp ng-4:/docker-entrypoint.sh .
 
 ```bash
 docker container rm -f ng ng-1 ng-2 ng-3
+```
+
+## Part 6 - env and env-file flag
+
+- Create a container and check the environment variable.
+
+```bash
+docker container run -it --name mycon --env var=key ubuntu
+# printenv
+```
+
+- Create a `myfile.env` file as below.
+
+```txt
+a=1
+b=2
+c=3
+```
+
+- Create a container and check the environment variable.
+
+```bash
+docker container run -it --name mycon2 --env-file ./myfile.env ubuntu
+# printenv
+```
+
+- Delete the containers.
+
+```bash
+docker container rm -f mycon mycon2
 ```
