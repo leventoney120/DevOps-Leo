@@ -26,6 +26,13 @@ At the end of the this hands-on training, students will be able to;
 
 # It will take some time. go to the next steps.
 
+<<<<<<< HEAD
+- Go to the `variables.tf` file and comment the variable `ec2-ami`.
+
+- Go to the `main.tf` file make the changes in order.
+
+```go
+=======
 - Go to the `main.tf` file make the changes in order.
 
 ```go
@@ -46,6 +53,7 @@ locals {
   mytag = "clarusway-local-name"
 }
 
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440
 data "aws_ami" "tf_ami" {
   most_recent      = true
   owners           = ["self"]
@@ -56,6 +64,12 @@ data "aws_ami" "tf_ami" {
   }
 }
 
+<<<<<<< HEAD
+resource "aws_instance" "tf-ec2" {
+  ami           = data.aws_ami.tf_ami.id
+  instance_type = var.ec2-type
+  key_name      = "mk"
+=======
 variable "ec2_type" {
   default = "t2.micro"
 }
@@ -64,6 +78,7 @@ resource "aws_instance" "tf-ec2" {
   ami           = data.aws_ami.tf_ami.id
   instance_type = var.ec2_type
   key_name      = "aduncan"
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440
   tags = {
     Name = "${local.mytag}-this is from my-ami"
   }
@@ -100,8 +115,15 @@ terraform destroy
     s3-backend
        └── backend.tf
     terraform-aws
+<<<<<<< HEAD
+       ├── oliver.tfvars
+       ├── main.tf
+       └── variables.tf
+
+=======
        ├── main.tf
      
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440
 ```
 
 - Go to the `s3-backend` folder and create a file name `backend.tf`. Add the followings.
@@ -116,7 +138,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "tf-remote-state" {
+<<<<<<< HEAD
+  bucket = "tf-remote-s3-bucket-james-changehere"
+=======
   bucket = "tf-remote-s3-bucket-clarusways-changehere"
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440
 
   force_destroy = true # Normally it must be false. Because if we delete s3 mistakenly, we lost all of the states.
 }
@@ -166,7 +192,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
+<<<<<<< HEAD
+      version = "4.23.0"
+=======
       version = "4.8.0"
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440
     }
   }
   backend "s3" {
@@ -200,21 +230,36 @@ terraform apply
 - Go to the `main.tf` file add the followings and check the versioning on AWS S3 console.
 
 ```go
+<<<<<<< HEAD
+output "s3-arn-1" {
+  value = aws_s3_bucket.tf-s3["fredo"].arn
+  }
+=======
 resource "aws_s3_bucket" "tf-test-1" {
   bucket = "clarusway-test-1-versioning"
 }
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440
 ```
 
 ```bash
 terraform apply
 ```
 
+<<<<<<< HEAD
+- Go to the `main.tf` file make the changes (add another output).
+
+```go
+  output "s3-arn-2" {
+      value = aws_s3_bucket.tf-s3["santino"].arn
+  }
+=======
 - Go to the `main.tf` file make the changes.
 
 ```go
 resource "aws_s3_bucket" "tf-test-2" {
   bucket = "clarusway-test-2-locking-2"
 }
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440
 ```
 
 - Open a new terminal. Write `terraform apply` in the both terminal. Try to run the command in both terminals at the same time.
@@ -360,4 +405,7 @@ terraform apply
 ```bash
 $ terraform destroy
 ```
+<<<<<<< HEAD
+=======
 ```
+>>>>>>> 73b9527b035d06c6743d95b77e4e502c4eb5d440

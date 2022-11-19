@@ -97,10 +97,8 @@ def hello():
 - Create another file called `requirements.txt` in your project folder, add `flask` and `redis` as package list.
 
 ```bash
-echo '
 flask
 redis
-' > requirements.txt
 ```
 
 - Create a Dockerfile which builds a Docker image and explain what it does.
@@ -118,7 +116,6 @@ The image contains all the dependencies for the application, including Python it
 ```
 
 ```bash
-echo '
 FROM python:3.7-alpine
 WORKDIR /code
 ENV FLASK_APP app.py
@@ -129,7 +126,6 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 COPY . .
 CMD ["flask", "run"]
-' > Dockerfile
 ```
 
 - Create a file called `docker-compose.yml` in your project folder and define services and explain services.
@@ -145,7 +141,6 @@ The redis service uses a public Redis image pulled from the Docker Hub registry.
 ```
 
 ```bash
-echo '
 version: "3"
 services:
   web:
@@ -154,7 +149,6 @@ services:
       - "5000:5000"
   redis:
     image: "redis:alpine"
-' > docker-compose.yml
 ```
 
 - Build and run your app with `Docker Compose` and explains what is happening.
@@ -191,11 +185,6 @@ docker-compose help | less
 ```
 
 - Run `docker-compose ps` command. Notice that it will not work, produces an error. Mention that docker-compose commands must be implemented in related directory.
-
-```bash
-cd composetest
-docker-compose ps
-```
 
 - Change directory to "composetest" and run `docker-compose ps` command to see the containers. Show the naming convention of docker-compose.
 
