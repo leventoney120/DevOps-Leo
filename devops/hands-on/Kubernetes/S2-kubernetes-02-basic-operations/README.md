@@ -347,7 +347,7 @@ metadata:
   annotations:
     kubernetes.io/change-cause: deploy/clarus-deploy is set as container-info=clarusway/container-info:1.0
 spec:
-  replicas: 3
+    replicas: 2
   selector:
     matchLabels:
       app: container-info
