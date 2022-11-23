@@ -116,7 +116,6 @@ spec:
     metadata:
       labels:
         app: web-flask
-        env: front-end
     spec:
       containers:
       - name: web-flask-pod
@@ -225,7 +224,7 @@ spec:
   - port: 3000  
     targetPort: 5000
   selector:
-    env: front-end 
+    app: web-flask
 ```
   
 ```bash
@@ -295,7 +294,7 @@ spec:
   - port: 3000  
     targetPort: 5000
   selector:
-    env: front-end 
+    app: web-flask
 ```
 
 - Configure the web-flask-svc service via apply command.
@@ -419,6 +418,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-flask-deploy
+  labels:
+    app: web-flask
   namespace: demo
 spec:
   replicas: 3
@@ -435,9 +436,6 @@ spec:
     metadata:
       labels:
         app: web-flask
-        env: front-end
-        version: v1
-        test: coupling
     spec:
       containers:
       - name: web-flask-pod
@@ -463,7 +461,7 @@ spec:
     targetPort: 5000
     nodePort: 30036
   selector:
-    env: front-end
+    app: web-flask
 ```
 
 - create deployment and service

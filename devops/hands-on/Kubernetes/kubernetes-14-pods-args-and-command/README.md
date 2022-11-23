@@ -164,6 +164,11 @@ spec:
     image: clarusway/entrypoint-cmd
     command: ["sleep"]  # This overwrites ENTRYPOINT in Dockerfile. 
     args: ["10"]  # This overwrites CMD in Dockerfile
+    env:
+    - name: firstkey
+      value: "firstvalue"
+    - name: secondkey
+      value: "secondvalue"
 ```
 
 > Note: `command` field in a pod object overwrites `ENTRYPOINT` in Dockerfile, and `args` field overwrites CMD in Dockerfile.
