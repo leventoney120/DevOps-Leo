@@ -1,4 +1,4 @@
-# Hands-on Kubernetes-12 : Kubernetes Pod Scheduling
+# Hands-on Kubernetes-12a : Kubernetes Pod Scheduling
 
 The purpose of this hands-on training is to give students the knowledge of pod scheduling.
 
@@ -18,9 +18,11 @@ At the end of this hands-on training, students will be able to;
 
 - Part 4 - nodeSelector
 
-- Part 5 - Node Affinity  
+- Part 5 - Node Affinity
 
-- Part 6 - Taints and Tolerations
+- Part 6 - Pod Affinity
+
+- Part 7 - Taints and Tolerations
 
 ## Part 1 - Setting up the Kubernetes Cluster
 
@@ -306,7 +308,7 @@ spec:
             nodeSelectorTerms:
             - matchExpressions:
               - key: size
-                operator: In
+                operator: In # NotIn, Exists and DoesNotExist
                 values:
                 - large
                 - medium
@@ -338,10 +340,10 @@ kubectl get po -o wide
 kubectl delete -f clarus-deploy.yaml 
 ```
 
-- Edit the controlplane node and delete `size=large` line from `labels` field.
+- Delete `size=large` label from `kube-master` node.
 
 ```bash
-kubectl edit node  kube-master
+kubectl label node kube-master size-
 ```
 
 - Create the clarus-deploy again.
@@ -419,8 +421,97 @@ kubectl delete -f clarus-deploy.yaml
 
 - The `IgnoredDuringExecution` part of the names means that similar to how nodeSelector works, if labels on a node change at runtime such that the affinity rules on a pod are no longer met, the pod continues to run on the node. In the future, the Kubernetes community plans to offer `requiredDuringSchedulingRequiredDuringExecution` which will be identical to `requiredDuringSchedulingIgnoredDuringExecution` except that it will evict pods from nodes that cease to satisfy the pods' node affinity requirements.
 
+## Part 7 - Pod Affinity
 
-## Part 6 - Taints and Tolerations
+- Pod Affinity allow you to constrain which nodes your Pods can be scheduled on based on the labels of Pods already running on that node, instead of the node labels.
+
+- We have a DB pod and frontend deployment. We want to schedule DB pods and frontend pods on the same node.
+
+- create yaml file and named `clarus-db.yaml`.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: clarus-db
+  labels:
+    tier: db
+spec:
+  containers:
+  - name: clarus-db
+    image: clarusway/clarusdb
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+```
+
+- Create the pod with `kubectl apply` command.
+
+```bash
+kubectl apply -f clarus-db.yaml
+```
+
+- List the pods.
+
+```bash
+kubectl get po -o wide
+```
+
+-  Create yaml file named `clarusshop-deploy.yaml`.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clarusshop
+  labels:
+    app: clarusshop
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: clarusshop
+  template:
+    metadata:
+      labels:
+        app: clarusshop
+    spec:
+      containers:
+      - name: clarusshop
+        image: clarusway/clarusshop
+        ports:
+        - containerPort: 80
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: tier
+                operator: In
+                values:
+                - db
+            topologyKey: "kubernetes.io/hostname"
+```
+
+- Create the deployment with `kubectl apply` command.
+
+```bash
+kubectl apply -f clarusshop-deploy.yaml
+```
+
+- List the pods and notice that the clarusshop pods are assigned to the same nod with clarus-db pod.
+
+```bash
+kubectl get po -o wide
+```
+
+- Delete the deployment and pods.
+
+```bash
+kubectl delete -f clarusshop-deploy.yaml
+kubectl delete -f clarus-db.yaml
+```
+
+## Part 7 - Taints and Tolerations
 
 - Taints allow a node to repel a set of pods.
 
@@ -577,6 +668,3 @@ kubectl delete -f clarus-deploy.yaml
 ```bash
 kubectl taint nodes kube-worker-1 clarus=way:NoSchedule-
 ```
-
-
-
