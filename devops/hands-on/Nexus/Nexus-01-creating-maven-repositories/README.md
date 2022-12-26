@@ -62,7 +62,7 @@ ls /etc/yum.repos.d/
 ```
 
 ```
-sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/7/g /etc/yum.repos.d/epel-apache-maven.repo
 ```
 
 ```
