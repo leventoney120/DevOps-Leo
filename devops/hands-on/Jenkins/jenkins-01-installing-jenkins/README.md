@@ -289,4 +289,3 @@ https://github.com/<your_github_account_name>/jenkinsfile-pipeline-project/
 - Go to the Jenkins project page and click `Build Now`.
 
 - Explain the role of `Jenkinsfile` and the built results.
-

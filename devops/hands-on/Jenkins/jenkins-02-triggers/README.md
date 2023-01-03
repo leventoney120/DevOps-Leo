@@ -180,8 +180,6 @@ git push
 
 - Explain the role of `Jenkinsfile` and GitHub Webhook in this automation.
 
-
-
 ## Part 3 - Configuring Jenkins Pipeline with GitHub Webhook to Run the Python Code
 
 - To build the `python` code with Jenkins pipeline using the `Jenkinsfile` and `GitHub Webhook`, we will leverage from the same job created in Part 2 (named as `pipeline-with-jenkinsfile-and-webhook`). 
@@ -228,9 +226,6 @@ git push
 ```
 
 - Observe the new built triggered with `git push` command on the Jenkins project page.
-
-
-
 
 ## Part 4 - Creating a Pipeline with Poll SCM
 

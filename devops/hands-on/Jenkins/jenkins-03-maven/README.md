@@ -30,7 +30,7 @@ At the end of the this hands-on training, students will be able to;
   
 ```bash
 sudo yum update -y
-sudo amazon-linux-extras install java-openjdk11 -y
+sudo yum install java-11-amazon-corretto -y
 ```
 
 - Install Maven
@@ -39,7 +39,7 @@ sudo amazon-linux-extras install java-openjdk11 -y
 sudo su
 cd /opt
 rm -rf maven
-wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
 tar -zxvf $(ls | grep apache-maven-*-bin.tar.gz)
 rm -rf $(ls | grep apache-maven-*-bin.tar.gz)
 sudo ln -s $(ls | grep apache-maven*) maven
@@ -72,9 +72,9 @@ sudo yum install git -y
   
 - Go to the `Global Tool Configuration`
 - To the bottom, `Maven` section
-  - Give a name such as `maven-3.8.6`
+  - Give a name such as `maven-3.8.7`
   - Select `install automatically`
-  - `Install from Apache` version `3.8.6`
+  - `Install from Apache` version `3.8.7`
 - Save
 
 ## Part 3 - Creating Package Application - Free Style Maven Job
@@ -101,7 +101,7 @@ sudo yum install git -y
 
 - For `Build`, select `Invoke top-level Maven targets`
 
-  - For `Maven Version`, select the pre-defined maven, `maven-3.8.6` 
+  - For `Maven Version`, select the pre-defined maven, `maven-3.8.7` 
   - For `Goals`, write `clean package`
   - POM: `pom.xml`
 
@@ -271,5 +271,3 @@ git push
 ```
 
 - Observe the new built triggered with `git push` command on the Jenkins project page.
-
-- Explain the role of the docker image of maven, `Jenkinsfile` and GitHub Webhook in this automation.
