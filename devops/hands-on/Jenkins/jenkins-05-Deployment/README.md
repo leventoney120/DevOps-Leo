@@ -105,7 +105,7 @@ At the end of the this hands-on training, students will be able to;
 -  Go to the `build-web-application`
    -  Select `Configure`
    -  Select the `Post-build Actions` tab
-   -  From `Add post-build action`, `Build othe projects`
+   -  From `Add post-build action`, `Build other projects`
       -  For `Projects to build`, fill in `Deploy-Application-Staging-Environment`
       -  And select `Trigger only if build is stable` option.
    - Go to the `Build Triggers` tab
@@ -150,7 +150,7 @@ At the end of the this hands-on training, students will be able to;
 
 - For `Add post-build action`, select `Deploy war/ear to a container`
   - for `WAR/EAR files`, fill in `**/*.war`.
-  - for `Context path`, filll in `/`.
+  - for `Context path`, fill in `/`.
   - for `Containers`, select `Tomcat 9.x Remote`.
   - From `Credentials`, select `tomcat/*****`.
   - for `Tomcat URL`, select `private ip` of production tomcat server like `http://172.31.28.5:8080`.
