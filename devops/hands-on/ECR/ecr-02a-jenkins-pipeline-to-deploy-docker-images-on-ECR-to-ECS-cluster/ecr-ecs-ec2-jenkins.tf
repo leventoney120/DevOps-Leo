@@ -105,7 +105,7 @@ resource "aws_instance" "jenkins-server" {
           amazon-linux-extras install java-openjdk11 -y
           wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
           rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
-          amazon-linux-extras install epel
+          amazon-linux-extras install epel -y
           # install jenkins
           yum install jenkins -y
           systemctl start jenkins
@@ -133,7 +133,7 @@ resource "aws_instance" "jenkins-server" {
 
   provisioner "remote-exec" {
     inline = [
-      "sleep 150",
+      "sleep 3m",
       "wget https://github.com/awsdevopsteam/jenkins-first-project/raw/master/to-do-app-nodejs.tar",
       "tar -xvf to-do-app-nodejs.tar",
       "rm to-do-app-nodejs.tar",
@@ -144,7 +144,7 @@ resource "aws_instance" "jenkins-server" {
       "git config --global user.name ${local.github-username}",
       "git add .",
       "git commit -m 'added todo app'",
-      "git push https://${local.github-username}:${local.github-token}@github.com/${local.github-username}/${github_repository.githubrepo.name}",
+      "git push",
     ]
     connection {
       type        = "ssh"
