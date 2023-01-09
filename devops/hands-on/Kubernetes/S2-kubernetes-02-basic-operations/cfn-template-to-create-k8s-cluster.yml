@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Description: |
-  This Cloudformation Template creates a Kubernetes Cluster on Ubuntu 20.04 of EC2 Instances.
+  This Cloudformation Template creates a Kubernetes Cluster on Ubuntu 22.04 of EC2 Instances.
   Kubernetes cluster comprises of one master node and one worker node.
   Once the Master node is up and running, Worker node automatically joins the Cluster.
   Managers security group allows all protocols from all ports within itself and from the Workers.
@@ -106,7 +106,7 @@ Resources:
   KubeMaster1:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0dba2cb6798deb6d8
+      ImageId: ami-04505e74c0741db8d
       InstanceType: t3a.medium
       KeyName: !Ref KeyPairName
       IamInstanceProfile: !Ref EC2ConnectProfile
@@ -115,7 +115,7 @@ Resources:
       Tags:                
         -                        
           Key: Name
-          Value: !Sub Kube Master 1st on Ubuntu 20.04 of ${AWS::StackName}
+          Value: !Sub Kube Master 1st on Ubuntu 22.04 of ${AWS::StackName}
       UserData: 
         Fn::Base64: 
           !Sub |
@@ -163,7 +163,7 @@ Resources:
     DependsOn:
       - KubeMaster1
     Properties:
-      ImageId: ami-0dba2cb6798deb6d8
+      ImageId: ami-04505e74c0741db8d
       InstanceType: t3a.medium
       KeyName: !Ref KeyPairName
       IamInstanceProfile: !Ref EC2ConnectProfile
@@ -172,7 +172,7 @@ Resources:
       Tags:                
         -                        
           Key: Name
-          Value: !Sub Kube Worker 1st on Ubuntu 20.04 of ${AWS::StackName}
+          Value: !Sub Kube Worker 1st on Ubuntu 22.04 of ${AWS::StackName}
       UserData: 
         Fn::Base64: 
           !Sub |

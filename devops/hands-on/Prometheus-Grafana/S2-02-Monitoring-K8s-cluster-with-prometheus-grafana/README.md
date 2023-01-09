@@ -363,8 +363,8 @@ web-prometheus-server   NodePort   10.106.87.104   <none>        90:32000/TCP   
 
 ```bash
 sudo apt-get install -y adduser libfontconfig1
-wget https://dl.grafana.com/enterprise/release/grafana-enterprise_9.0.0_amd64.deb
-sudo dpkg -i grafana-enterprise_9.0.0_amd64.deb
+wget https://dl.grafana.com/enterprise/release/grafana-enterprise_9.3.2_amd64.deb
+sudo dpkg -i grafana-enterprise_9.3.2_amd64.deb
 ```
 
 - To start the service:
