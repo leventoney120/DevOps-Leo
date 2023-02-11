@@ -4,6 +4,8 @@
 Gitflow: https://www.youtube.com/watch?v=1SXpE08hvGs
 Gitflow: https://nvie.com/posts/a-successful-git-branching-model/
 JaCoCo Sample Report: https://www.jacoco.org/jacoco/trunk/coverage/
+K8s AWS Prerequisites: https://kubernetes.github.io/cloud-provider-aws/prerequisites/
+K8s Ports and Protocols: https://kubernetes.io/docs/reference/networking/ports-and-protocols/
 kompose installation: https://kompose.io/installation
 Kompose/User Guide: https://kompose.io/user-guide/#user-guide
 Helm/Introduction: https://helm.sh/docs/intro/
